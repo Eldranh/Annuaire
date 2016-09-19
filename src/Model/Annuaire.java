@@ -16,6 +16,8 @@ public class Annuaire {
 		contacts.add(new Personne("Zibouda", "0693 32 20 28", "zibouda@univ-reunion.fr", "Qui peut bien s'appeler ainsi ?", "Zoulou"));
 		contacts.add(new Entreprise("Astra corp.", "0692 1234 56", "astra@gmail.com", "Ad Astra ! Lux phenomenon", "486 123 794"));
 		contacts.add(new Entreprise());
+		contacts.add(new Entreprise("Github entreprise", "0692 534 096", "eldranh@github.com", "Test de github", "337 425 918"));
+
 	}
 	
 	public String toString() {
