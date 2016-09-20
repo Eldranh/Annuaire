@@ -93,6 +93,8 @@ public abstract class Contact implements Comparable<Contact> {
 				return false;
 		} else if (!numTel.equals(other.numTel))
 			return false;
+		if (!this.getClass().equals(other.getClass()))
+			return false;
 		return true;
 	}
 	
