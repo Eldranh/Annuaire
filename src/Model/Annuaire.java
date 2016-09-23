@@ -1,10 +1,14 @@
 package Model;
 
+import java.io.FileOutputStream;
 import java.util.Iterator;
 import java.util.TreeSet;
+import org.jdom2.*;
+import org.jdom2.output.*;
 
 public class Annuaire {
 	TreeSet<Contact> contacts;
+	Element saveTree;
 
 	public Annuaire() {
 		contacts = new TreeSet<Contact>();
@@ -28,4 +32,66 @@ public class Annuaire {
 		   toRet += it.next() + "\n\n";
 		return (toRet);
 	}
+	
+	private void buildContact(Element contact, Contact toSave) {
+		boolean isPersonne = toSave.getClass() == Personne.class;
+		Element attr;
+		Attribute type = new Attribute("type", isPersonne ? "Personne" : "Entreprise");
+		
+		// Sauvegarde du nom
+		contact.setAttribute(type);
+		attr = new Element("nom");
+		attr.setText(toSave.getNom());
+		contact.addContent(attr);
+		
+		// Sauvegarde d'email
+		contact.setAttribute(type);
+		attr = new Element("email");
+		attr.setText(toSave.getEmail());
+		contact.addContent(attr);
+
+		// Sauvegarde du numéro de téléphone
+		contact.setAttribute(type);
+		attr = new Element("numTel");
+		attr.setText(toSave.getNumTel());
+		contact.addContent(attr);
+
+		// Sauvegarde du commentaire
+		contact.setAttribute(type);
+		attr = new Element("comment");
+		attr.setText(toSave.getComment());
+		contact.addContent(attr);
+
+		// Sauvegarde de l'info supplémentaire
+		contact.setAttribute(type);
+		attr = new Element(isPersonne ? "prenom" : "siren");
+		if (isPersonne)
+			attr.setText(((Personne)toSave).getPrenom());
+		else
+			attr.setText(((Entreprise)toSave).getSiren());
+		contact.addContent(attr);
+	}
+	
+	private void buildSaveTree() {
+		Iterator<Contact> it = contacts.iterator();
+		Contact toSave;
+		Element contact;
+		
+		saveTree = new Element("Annuaire");
+		while (it.hasNext()) {
+			toSave = it.next();
+			contact = new Element("Contact");
+			saveTree.addContent(contact);
+			buildContact(contact, toSave);
+		}
+	}
+	
+	public void enregistre() {
+		try
+		{
+			buildSaveTree();
+			XMLOutputter sortie = new XMLOutputter(Format.getCompactFormat());
+			sortie.output(saveTree, new FileOutputStream("save.xml"));
+		}
+		catch (java.io.IOException e){} }
 }
