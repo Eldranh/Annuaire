@@ -1,0 +1,31 @@
+<?xml version = "1.0" encoding="UTF-8" standalone="yes" ?>
+<Contacts>
+	<Contact type="Personne">
+		<nom>Payet</nom>
+		<Prenom>Pierre</Prenom>
+		<numTel>123456</numTel>
+		<email>pierre@bla.fr</email>
+		<com>bla</com>
+	</Contact>
+	<Contact type="Personne" >
+		<nom>Hoareau</nom>
+		<Prenom>Albert</Prenom>
+		<numTel>123458</numTel>
+		<email>albert@bla.fr</email>
+		<com>bli</com>
+	</Contact>	
+	<Contact type="Entreprise">
+		<nom>blabla Inc</nom>
+		<numTel>987654</numTel>
+		<email>Blabla@Inc.fr</email>
+		<com>Blabla</com>
+		<siren>123456789</siren>
+	</Contact>
+
+
+		
+</Contacts>
+
+
+
+
